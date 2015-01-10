@@ -1,0 +1,5 @@
+[package]
+
+name = "ProjectEuler"
+version = "0.0.1"
+authors = ["Ap0ph1s <karimellaisy@hotmail.com>", "Tim Brooks <brooks@cern.ch>"]
