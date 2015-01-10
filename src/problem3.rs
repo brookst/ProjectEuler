@@ -1,43 +1,47 @@
 #[cfg(test)]
 extern crate test;
 
-fn problem3() -> isize {
-  let (mut _i,mut _j,mut _k) = (0i, 0i, 0i);
-  let num = 600851475143f64;
-  let mut max = 1.0f64;
-  let mut largest = 0is;
-  while _i<=(num/max) as isize{
-      _k=0;
-      if num%_i as f64==0f64{
-         _j=1;
-          while _j<=_i{
-            if _i%_j==0 as isize{
-                 _k += 1;
-                 }
-             _j+=1;
-          }
-          if _k==2 {
-             max *= _i as f64;
-             largest = _i;
-             println!("{} is a prime factor",_i);
+fn problem3(verbose: bool) -> isize {
+    let (mut candidate, mut _partner, mut _factors, mut largest) = (0is, 0, 0, 0);
+    let num = 600851475143f64;
+    let mut max = 1.0f64;
+    while candidate <= (num / max) as isize {
+        _factors = 0;
+        if num % candidate as f64 == 0f64{
+            // candidate is a factor of num
+            _partner = 1;
+            while _partner <= candidate {
+                if candidate % _partner == 0 as isize{
+                    // candidate has a _partner
+                    _factors += 1;
+                }
+                _partner += 1;
             }
-      }
-      _i+=1;
-   }
-   largest
+            if _factors == 2 {
+                // candidate has only 2 factors, itself and 1
+                if verbose {
+                    println!("    {:4} is a prime factor",candidate);
+                }
+                largest = candidate;
+                max *= candidate as f64;
+            }
+        }
+        candidate += 1;
+    }
+    largest
 }
 
 pub fn main(){
-    problem3();
+    println!("Problem3: {}", problem3(true));
 }
 
 #[test]
 fn test3() {
     main();
-    assert!(problem3() == 6857is);
+    assert!(problem3(false) == 6857is);
 }
 
 #[bench]
 fn bench3(b: &mut test::Bencher) {
-    b.iter(|| problem3());
+    b.iter(|| problem3(false));
 }
