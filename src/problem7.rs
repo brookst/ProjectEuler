@@ -1,3 +1,6 @@
+#[cfg(test)]
+extern crate test;
+
 fn problem7() -> isize {
    let (mut n, mut i, mut count, mut c, mut a) = (0is,3,0,0,1);//int n, i = 3, count, c;
  
@@ -36,4 +39,9 @@ pub fn main() {
 #[test]
 fn test7() {
     assert!(problem7() == 104743is);
+}
+
+#[bench]
+fn bench7(b: &mut test::Bencher) {
+    b.iter(|| problem7());
 }
