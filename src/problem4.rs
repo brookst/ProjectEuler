@@ -17,7 +17,7 @@ fn problem4() -> isize {
     for i in (100..999) {
         for j in (100..999) {
             let candidate = i * j;
-            if is_palindrome(candidate) && candidate > largest {
+            if candidate > largest && is_palindrome(candidate) {
                 largest = candidate;
             }
         }
